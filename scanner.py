@@ -21,20 +21,26 @@ def get_data(symbol):
     closes = [float(x[4]) for x in data['result']['list']]
     return pd.DataFrame(closes, columns=['close'])
 
-symbols = get_symbols()
+print("🚀 Scanner Started...")
 
-for symbol in symbols[:50]:
-    try:
-        df = get_data(symbol)
-        df['change'] = df['close'].pct_change()
+while True:
+    symbols = get_symbols()
 
-        last = df['change'].iloc[-1]
+    for symbol in symbols[:50]:
+        try:
+            df = get_data(symbol)
+            df['change'] = df['close'].pct_change()
 
-        if last > 0.05:
-            send_alert(f"🚀 Pump: {symbol}")
+            last = df['change'].iloc[-1]
 
-        if last < -0.05:
-            send_alert(f"🔻 Dump: {symbol}")
+            if last > 0.05:
+                send_alert(f"🚀 Pump: {symbol}")
 
-    except:
-        pass
+            if last < -0.05:
+                send_alert(f"🔻 Dump: {symbol}")
+
+        except:
+            continue
+
+    print("Cycle complete, waiting...")
+    time.sleep(60)
