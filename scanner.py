@@ -23,7 +23,7 @@ def send_alert(msg):
 
 # 📊 GET ALL SYMBOLS
 def get_symbols():
-    url = "https://api.bybit.com/v5/market/instruments-info?category=linear"
+    url = "https://api.bytick.com/v5/market/instruments-info?category=linear"
     
     try:
         res = requests.get(url, headers=HEADERS, timeout=10)
@@ -53,7 +53,7 @@ def get_symbols():
 
 # 📉 GET PRICE DATA
 def get_data(symbol):
-    url = f"https://api.bybit.com/v5/market/kline?category=linear&symbol={symbol}&interval=5"
+    url = f"https://api.bytick.com/v5/market/kline?category=linear&symbol={symbol}&interval=5"
 
     try:
         res = requests.get(url, headers=HEADERS, timeout=10)
